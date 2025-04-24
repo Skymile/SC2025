@@ -5,3 +5,5 @@
 /.vs
 /Snake.Console/.vs/Snake.Console
 /Snake.Console/Snake.Console/obj
+/Snake.Console/.vs/ProjectEvaluation
+/Snake.Console/Snake.Console/bin/Debug/net8.0
