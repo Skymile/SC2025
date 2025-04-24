@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Snake.Console/.vs/Snake.Console
+/Snake.Console/Snake.Console/obj
