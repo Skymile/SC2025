@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "Snake.Desktop/1.0.0": {
+        "dependencies": {
+          "Snake.Core": "1.0.0"
+        },
         "runtime": {
           "Snake.Desktop.dll": {}
+        }
+      },
+      "Snake.Core/1.0.0": {
+        "runtime": {
+          "Snake.Core.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Snake.Desktop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Snake.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

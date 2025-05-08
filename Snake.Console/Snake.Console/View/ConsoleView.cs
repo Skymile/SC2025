@@ -1,5 +1,8 @@
 ﻿public class ConsoleView : IViewService
 {
+    public ConsoleView() =>
+        Console.CursorVisible = false;
+
     public void Display(
         IEnumerable<Point> snake,
         IEnumerable<Point> apples,

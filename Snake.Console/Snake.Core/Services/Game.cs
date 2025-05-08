@@ -1,10 +1,8 @@
 ﻿
-public class Game(IViewService view)
+public class Game(IViewService view, Config cfg)
 {
     public void Initialize()
     {
-        Console.CursorVisible = false;
-
         var fullSnake = new List<Point>() { cfg.StartingPosition };
         for (int i = 0; i < board.MapWidth; i++)
             fullSnake.Add(new(i, cfg.StartingPosition.Y));
@@ -17,16 +15,16 @@ public class Game(IViewService view)
     {
         Point dir = new(1, 0);
         var task = Task.Run(GetDirection);
-        
-        Point GetDirection() =>
-            Console.ReadKey(true).Key switch
-            {
-                ConsoleKey.W => dir.Y > 0 ? dir : new(+0, -1),
-                ConsoleKey.S => dir.Y < 0 ? dir : new(+0, +1),
-                ConsoleKey.A => dir.X > 0 ? dir : new(-1, +0),
-                ConsoleKey.D => dir.X < 0 ? dir : new(+1, +0),
-                _ => dir
-            };
+
+        Point GetDirection() => new(0, 1);
+            //Console.ReadKey(true).Key switch
+            //{
+            //    ConsoleKey.W => dir.Y > 0 ? dir : new(+0, -1),
+            //    ConsoleKey.S => dir.Y < 0 ? dir : new(+0, +1),
+            //    ConsoleKey.A => dir.X > 0 ? dir : new(-1, +0),
+            //    ConsoleKey.D => dir.X < 0 ? dir : new(+1, +0),
+            //    _ => dir
+            //};
 
         while (true)
         {
@@ -69,8 +67,7 @@ public class Game(IViewService view)
         }
     }
 
-    private readonly Config cfg   = new();
-    private readonly Board  board = new();
+    private readonly Board  board = new(cfg);
     private readonly Snake  snake = new();
 
     private List<Point> walls  = [];

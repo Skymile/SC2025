@@ -19,3 +19,7 @@ C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\obj\Debug\net8.0-
 C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\obj\Debug\net8.0-windows\Snake.Desktop.pdb
 C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\obj\Debug\net8.0-windows\Snake.Desktop.genruntimeconfig.cache
 C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\obj\Debug\net8.0-windows\ref\Snake.Desktop.dll
+C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\bin\Debug\net8.0-windows\Snake.Core.dll
+C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\bin\Debug\net8.0-windows\Snake.Core.pdb
+C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\obj\Debug\net8.0-windows\Snake.Desktop.csproj.AssemblyReference.cache
+C:\Users\milew\source\repos\SC2025\Snake.Console\Snake.Desktop\obj\Debug\net8.0-windows\Snake.De.DBDB31DB.Up2Date

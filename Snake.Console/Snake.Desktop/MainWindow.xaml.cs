@@ -1,24 +1,49 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Snake.Desktop
+namespace Snake.Desktop;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        ioc = new IoC()
+            .RegisterSingleton<IViewService>(new WpfView(MainGrid))
+            .RegisterSingleton<Config>()
+            .RegisterSingleton<Game>();
+        
+        cfg = ioc.GetService<Config>();
+        (ioc.GetService<IViewService>() as WpfView)?.Configure(cfg);
+
+        for (int i = 0; i < cfg.MapWidth; i++)
+            MainGrid.ColumnDefinitions.Add(CreateCol());
+        for (int i = 0; i < cfg.MapHeight; i++)
+            MainGrid.RowDefinitions.Add(CreateRow());
+
+        Loop();
     }
+
+    private async void Loop()
+    {
+        var game = ioc.GetService<Game>();
+
+        game.Initialize();
+
+        await game.GameLoop();
+    }
+
+    private static RowDefinition CreateRow() => new()
+    {
+        Height = new GridLength(64, GridUnitType.Pixel)
+    };
+
+    private static ColumnDefinition CreateCol() => new()
+    {
+        Width = new GridLength(64, GridUnitType.Pixel)
+    };
+
+    private readonly Config cfg;
+    private readonly IoC ioc = new();
 }

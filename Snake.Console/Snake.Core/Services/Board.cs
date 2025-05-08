@@ -1,8 +1,8 @@
 ﻿
-public class Board(int mapWidth = 20, int mapHeight = 15)
+public class Board(Config cfg)
 {
-    public int MapWidth  { get; private set; } = mapWidth;
-    public int MapHeight { get; private set; } = mapHeight;
+    public int MapWidth  { get; private set; } = cfg.MapWidth;
+    public int MapHeight { get; private set; } = cfg.MapHeight;
 
     public IEnumerable<Point> GetRandomPositions(
         IEnumerable<Point> taken, int count)

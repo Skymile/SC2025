@@ -1,5 +1,6 @@
 ﻿var ioc = new IoC()
     .RegisterSingleton<IViewService>(new ConsoleView())
+    .RegisterSingleton<Config>()
     .RegisterSingleton<Game>();
 
 var game = ioc.GetService<Game>();
