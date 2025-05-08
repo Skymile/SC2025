@@ -4,7 +4,7 @@
     {
         var fullSnake = new List<Point>() { cfg.StartingPosition };
         for (int i = 0; i < board.MapWidth; i++)
-            fullSnake.Add(new(i, cfg.StartingPosition.Y));
+            fullSnake.Add(new(i, cfg.StartingPosition.Y + 1));
 
         walls = board.GetRandomPositions(fullSnake, cfg.WallsCount).ToList();
         apples = board.GetRandomPositions(fullSnake.Concat(walls), cfg.ApplesCount).ToList();
@@ -58,7 +58,6 @@
 
     public async Task GameLoop()
     {
-        dir = new(1, 0);
         task = Task.Run(input.GetDirection);
 
         while (!IsFinished)
@@ -72,6 +71,6 @@
 
     private List<Point> walls  = [];
     private List<Point> apples = [];
-    private Point dir;
+    private Point dir = new(1, 0);
     private Task<Point> task;
 }

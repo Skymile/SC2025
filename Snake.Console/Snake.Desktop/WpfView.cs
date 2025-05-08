@@ -1,12 +1,13 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 public class WpfView : IViewService
 {
     private readonly Grid mainGrid;
     private Config? cfg;
-    private Dictionary<int, Dictionary<int, Label>> grid = [];
+    private Dictionary<int, Dictionary<int, Rectangle>> grid = [];
 
     public WpfView(Grid mainGrid) =>
         this.mainGrid = mainGrid;
@@ -23,15 +24,15 @@ public class WpfView : IViewService
         for (int x = 0; x < cfg.MapWidth; x++)
             for (int y = 0; y < cfg.MapHeight; y++)
             {
-                var label = new Label();
+                var rect = new Rectangle();
                 if (!grid.ContainsKey(x))
                     grid[x] = [];
                 
-                mainGrid.Children.Add(label);
-                Grid.SetRow(label, y);
-                Grid.SetColumn(label, x);
+                mainGrid.Children.Add(rect);
+                Grid.SetRow(rect, y);
+                Grid.SetColumn(rect, x);
                     
-                grid[x][y] = label;
+                grid[x][y] = rect;
             }
     }
 
@@ -54,7 +55,7 @@ public class WpfView : IViewService
     {
         foreach (var i in grid)
             foreach (var j in i.Value)
-                j.Value.Background = Brushes.LightGray;
+                j.Value.Fill = Brushes.LightGray;
 
         foreach (var p in snake)
             Write(p.X, p.Y, CellType.SnakeTail);
@@ -76,14 +77,28 @@ public class WpfView : IViewService
         Apple,
     }
 
-    private void Write(int x, int y, CellType type) =>
-        grid[x][y].Background = type switch
+    private void Write(int x, int y, CellType type)
+    {
+        var rect = grid[x][y];
+
+        rect.Fill = type switch
         {
             CellType.None      => Brushes.LightGray,
             CellType.SnakeHead => Brushes.Orange,
             CellType.SnakeTail => Brushes.OrangeRed,
             CellType.Wall      => Brushes.Black,
             CellType.Apple     => Brushes.Green,
-            _ => throw new NotImplementedException()
+            _                  => throw new NotImplementedException()
         };
+
+        rect.RadiusX = rect.RadiusY =
+            type switch
+            {
+                CellType.SnakeHead => 32,
+                CellType.SnakeTail => 32,
+                CellType.Wall      => 4,
+                CellType.Apple     => 32,
+                _ => 0
+            };
+    }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
         Title="MainWindow" Height="450" Width="800">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGray">
         <Grid Name="MainGrid"/>
     </Grid>
 </Window>

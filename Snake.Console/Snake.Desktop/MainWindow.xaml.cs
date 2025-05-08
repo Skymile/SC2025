@@ -28,15 +28,15 @@ public partial class MainWindow : Window
     {
         game = ioc.GetService<Game>();
         game.Initialize();
-        input.Game = game;
-        input.Cfg = cfg;
 
-        if (cfg.IsAsync)
-            while (!game.IsFinished)
-            {
-                await Task.Delay(100);
-                await game.Step(input.Direction);
-            }
+        if (!cfg.IsAsync)
+            return;
+
+        while (!game.IsFinished)
+        {
+            await Task.Delay(cfg.SnakeSpeed);
+            await game.Step(input.Direction);
+        }
     }
 
     private readonly Config cfg;
@@ -46,12 +46,21 @@ public partial class MainWindow : Window
     {
         switch (e.Key)
         {
-            case Key.W: input.Direction = new(0, -1); break;
-            case Key.S: input.Direction = new(0, +1); break;
-            case Key.A: input.Direction = new(-1, 0); break;
-            case Key.D: input.Direction = new(+1, 0); break;
+            case Key.W: Step(new(0, -1)); break;
+            case Key.S: Step(new(0, +1)); break;
+            case Key.A: Step(new(-1, 0)); break;
+            case Key.D: Step(new(+1, 0)); break;
         }
+    }
 
+    private async void Step(Point direction)
+    {
+        ArgumentNullException.ThrowIfNull(game);
+        ArgumentNullException.ThrowIfNull(cfg);
+
+        input.Direction = direction;
+        if (cfg.IsAsync != true)
+            await game.Step(direction);
         if (game.IsFinished)
             Application.Current.Shutdown();
     }
