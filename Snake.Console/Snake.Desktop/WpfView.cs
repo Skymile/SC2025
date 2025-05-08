@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 public class WpfView : IViewService
@@ -14,20 +15,35 @@ public class WpfView : IViewService
     {
         this.cfg = cfg;
 
+        for (int i = 0; i < cfg.MapWidth; i++)
+            mainGrid.ColumnDefinitions.Add(CreateCol());
+        for (int i = 0; i < cfg.MapHeight; i++)
+            mainGrid.RowDefinitions.Add(CreateRow());
+
         for (int x = 0; x < cfg.MapWidth; x++)
             for (int y = 0; y < cfg.MapHeight; y++)
             {
                 var label = new Label();
                 if (!grid.ContainsKey(x))
                     grid[x] = [];
-
+                
                 mainGrid.Children.Add(label);
-                Grid.SetRow(label, x);
-                Grid.SetColumn(label, y);
+                Grid.SetRow(label, y);
+                Grid.SetColumn(label, x);
                     
                 grid[x][y] = label;
             }
     }
+
+    private static RowDefinition CreateRow() => new()
+    {
+        Height = new GridLength(64, GridUnitType.Pixel)
+    };
+
+    private static ColumnDefinition CreateCol() => new()
+    {
+        Width = new GridLength(64, GridUnitType.Pixel)
+    };
 
     public void Display(
         IEnumerable<Point> snake,
@@ -38,9 +54,7 @@ public class WpfView : IViewService
     {
         foreach (var i in grid)
             foreach (var j in i.Value)
-            {
                 j.Value.Background = Brushes.LightGray;
-            }
 
         foreach (var p in snake)
             Write(p.X, p.Y, CellType.SnakeTail);

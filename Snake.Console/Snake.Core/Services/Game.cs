@@ -1,5 +1,4 @@
-﻿
-public class Game(IViewService view, Config cfg)
+﻿public class Game(IViewService view, Config cfg, IInputService input)
 {
     public void Initialize()
     {
@@ -11,65 +10,68 @@ public class Game(IViewService view, Config cfg)
         apples = board.GetRandomPositions(fullSnake.Concat(walls), cfg.ApplesCount).ToList();
     }
 
-    public async Task GameLoop()
+    public async Task Step(Point? overridenDirection = null)
     {
-        Point dir = new(1, 0);
-        var task = Task.Run(GetDirection);
+        task ??= Task.Run(input.GetDirection);
 
-        Point GetDirection() => new(0, 1);
-            //Console.ReadKey(true).Key switch
-            //{
-            //    ConsoleKey.W => dir.Y > 0 ? dir : new(+0, -1),
-            //    ConsoleKey.S => dir.Y < 0 ? dir : new(+0, +1),
-            //    ConsoleKey.A => dir.X > 0 ? dir : new(-1, +0),
-            //    ConsoleKey.D => dir.X < 0 ? dir : new(+1, +0),
-            //    _ => dir
-            //};
-
-        while (true)
+        if (cfg.IsAsync)
+            Thread.Sleep(cfg.SnakeSpeed);
+        if (overridenDirection is null && (!cfg.IsAsync || task.IsCompleted))
         {
-            if (cfg.IsAsync)
-                Thread.Sleep(cfg.SnakeSpeed);
-            if (!cfg.IsAsync || task.IsCompleted)
-            {
-                dir = await task;
-                task = Task.Run(GetDirection);
-            }
+            dir = await task;
+            task = Task.Run(input.GetDirection);
+        }
+        
+        snake.Move(board, overridenDirection ?? dir);
+        
+        if (snake.Positions.Concat(walls)
+                .Count(p => p.X == snake.First.X && p.Y == snake.First.Y) != 1)
+        {
+            IsFinished = true;
+            return;
+        }
 
-            snake.Move(board, dir);
-            if (snake.Positions.Concat(walls)
-                    .Count(p => p.X == snake.First.X && p.Y == snake.First.Y) != 1)
-                break;
+        for (int i = 0; i < apples.Count; i++)
+        {
+            var apple = apples[i];
+            if (apple.X != snake.First.X || apple.Y != snake.First.Y)
+                continue;
+            apples.RemoveAt(i);
+            snake.Enlarge();
 
-            for (int i = 0; i < apples.Count; i++)
-            {
-                var apple = apples[i];
-                if (apple.X != snake.First.X || apple.Y != snake.First.Y)
-                    continue;
-                apples.RemoveAt(i);
-                snake.Enlarge();
-
-                apples.Add(board
-                    .GetRandomPositions(snake.Positions.Concat(walls).Concat(apples), 1)
-                    .First()
-                );
-            }
-
-            var last = snake.Shrink();
-
-            view.Display(
-                snake.Positions,
-                apples,
-                walls,
-                last,
-                snake.First
+            apples.Add(board
+                .GetRandomPositions(snake.Positions.Concat(walls).Concat(apples), 1)
+                .First()
             );
         }
+
+        var last = snake.Shrink();
+
+        view.Display(
+            snake.Positions,
+            apples,
+            walls,
+            last,
+            snake.First
+        );
     }
+
+    public async Task GameLoop()
+    {
+        dir = new(1, 0);
+        task = Task.Run(input.GetDirection);
+
+        while (!IsFinished)
+            await Step();
+    }
+
+    public bool IsFinished { get; set; }
 
     private readonly Board  board = new(cfg);
     private readonly Snake  snake = new();
 
     private List<Point> walls  = [];
     private List<Point> apples = [];
+    private Point dir;
+    private Task<Point> task;
 }
