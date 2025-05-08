@@ -1,8 +1,8 @@
-﻿public class View
+﻿public class ConsoleView : IViewService
 {
     public void Display(
-        IEnumerable<Point> snake, 
-        IEnumerable<Point> apples, 
+        IEnumerable<Point> snake,
+        IEnumerable<Point> apples,
         IEnumerable<Point> walls,
         Point snakeLast,
         Point snakeHead)
