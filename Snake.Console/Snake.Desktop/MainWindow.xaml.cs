@@ -1,35 +1,39 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-using Snake.Core;
-
 namespace Snake.Desktop
 {
-    public class DesktopKeyMapper : IKeyMapper<Key>
+    public class Display : IDisplay
     {
-        public UserAction? ToUserAction(Key key) =>
-            key switch
-            {
-                Key.D or Key.Right => UserAction.GoRight,
-                Key.A or Key.Left  => UserAction.GoLeft,
-                Key.W or Key.Up    => UserAction.GoUp,
-                Key.S or Key.Down  => UserAction.GoDown,
-                _ => null,
-            };
+        public void Print(IEnumerable<Point> snake,
+                          int mapWidth,
+                          int mapHeight,
+                          Point apple)
+        {
+
+        }
     }
 
     public partial class MainWindow : Window
     {
+        private const int MapWidth = 30;
+        private const int MapHeight = 20;
+        private Input<Key> input;
+        private readonly Display output;
+        private readonly Board board;
+
         public MainWindow()
         {
             InitializeComponent();
+            input = new Input<Key>(new DesktopKeyMapper());
+            output = new Display();
+            board = new Board();
+            output.Print(board.GetSnake(), MapWidth, MapHeight, board.Apple);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            Key k = e.Key;
-
-            ;
+            input.GetDirection(() => e.Key);
         }
     }
 }

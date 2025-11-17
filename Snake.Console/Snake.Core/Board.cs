@@ -1,9 +1,4 @@
-﻿// https://github.com/Skymile/SC2025
-// https://forms.gle/35mRahLQ1FTsMTq48
-// https://discord.gg/pvfhyzmJ
-// Visual Studio // JetBrains Rider
-
-using Snake;
+﻿using Snake;
 
 public class Board
 {
