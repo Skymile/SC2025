@@ -5,6 +5,8 @@
 
 using Snake;
 
+bool isDebug = false;
+const int timeoutInMs = 50;
 const int MapWidth = 30;
 const int MapHeight = 20;
 
@@ -13,9 +15,23 @@ var input = new Input<ConsoleKey>(new ConsoleKeyMapper());
 var output = new Display();
 var board = new Board();
 
+Direction dir = Direction.Right;
+void SetDirection() => 
+    dir = input.GetDirection(() => Console.ReadKey(true).Key);
+
+Task inputTask;
+if (!isDebug)
+    inputTask = Task.Run(() =>
+    {
+        while (true)
+            SetDirection();
+    });
+
 while (true)
 {
-    var dir = input.GetDirection(() => Console.ReadKey(true).Key);
+    if (isDebug)
+        SetDirection();
+    await Task.Delay(timeoutInMs);
     board.Move(dir);
     if (board.IsGameOver(MapWidth, MapHeight))
         break;
