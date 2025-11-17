@@ -5,13 +5,21 @@
 
 using Snake;
 using Snake.Core.Enums;
+using Snake.Core.Interfaces;
 using Snake.Core.Services;
 
 Console.CursorVisible = false;
-var cfg = new Config();
-var input = new InputService<ConsoleKey>(new ConsoleKeyMapper());
-var output = new Display();
-var board = new Board();
+
+var ioc = new IoC()
+    .RegisterSingleton<Display, Display>()
+    .RegisterSingleton<Config, Config>()
+    .RegisterSingleton<Board, Board>()
+    .RegisterSingleton<IKeyMapper<ConsoleKey>, ConsoleKeyMapper>();
+
+var cfg    = ioc.Inject<Config>();
+var output = ioc.Inject<Display>();
+var board  = ioc.Inject<Board>();
+var input  = new InputService<ConsoleKey>(ioc.Inject<IKeyMapper<ConsoleKey>>());
 
 Direction dir = Direction.Right;
 void SetDirection() => 
