@@ -7,7 +7,7 @@ namespace Snake.Desktop
     {
         private const int MapWidth = 30;
         private const int MapHeight = 20;
-        private Input<Key> input;
+        private readonly Input<Key> input;
         private readonly Display output;
         private readonly Board board;
 
@@ -22,7 +22,11 @@ namespace Snake.Desktop
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            input.GetDirection(() => e.Key);
+            var dir = input.GetDirection(() => e.Key);
+            board.Move(dir);
+            if (board.IsGameOver(MapWidth, MapHeight))
+                Application.Current.Shutdown();
+            output.Print(board.GetSnake(), MapWidth, MapHeight, board.Apple);
         }
     }
 }
