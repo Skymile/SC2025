@@ -3,17 +3,6 @@ using System.Windows.Input;
 
 namespace Snake.Desktop
 {
-    public class Display : IDisplay
-    {
-        public void Print(IEnumerable<Point> snake,
-                          int mapWidth,
-                          int mapHeight,
-                          Point apple)
-        {
-
-        }
-    }
-
     public partial class MainWindow : Window
     {
         private const int MapWidth = 30;
@@ -26,7 +15,7 @@ namespace Snake.Desktop
         {
             InitializeComponent();
             input = new Input<Key>(new DesktopKeyMapper());
-            output = new Display();
+            output = new Display(this, MapWidth, MapHeight);
             board = new Board();
             output.Print(board.GetSnake(), MapWidth, MapHeight, board.Apple);
         }
