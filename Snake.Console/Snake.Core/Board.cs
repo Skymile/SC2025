@@ -1,4 +1,5 @@
-﻿using Snake;
+﻿using Snake.Core.Enums;
+using Snake.Core.Models;
 
 public class Board
 {

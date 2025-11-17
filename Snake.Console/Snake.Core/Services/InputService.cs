@@ -1,8 +1,9 @@
-﻿using Snake.Core;
+﻿using Snake.Core.Enums;
+using Snake.Core.Interfaces;
 
-namespace Snake;
+namespace Snake.Core.Services;
 
-public class Input<T>(IKeyMapper<T> mapper)
+public class InputService<T>(IKeyMapper<T> mapper)
 {
     public Direction GetDirection(Func<T> getKey) =>
         dir = mapper.ToUserAction(getKey()) switch

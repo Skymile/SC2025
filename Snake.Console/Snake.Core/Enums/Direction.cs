@@ -1,4 +1,4 @@
-﻿namespace Snake;
+﻿namespace Snake.Core.Enums;
 
 public enum Direction 
 { 

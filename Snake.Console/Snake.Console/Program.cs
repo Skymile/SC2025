@@ -4,14 +4,12 @@
 // Visual Studio // JetBrains Rider
 
 using Snake;
-
-bool isDebug = false;
-const int timeoutInMs = 50;
-const int MapWidth = 30;
-const int MapHeight = 20;
+using Snake.Core.Enums;
+using Snake.Core.Services;
 
 Console.CursorVisible = false;
-var input = new Input<ConsoleKey>(new ConsoleKeyMapper());
+var cfg = new Config();
+var input = new InputService<ConsoleKey>(new ConsoleKeyMapper());
 var output = new Display();
 var board = new Board();
 
@@ -20,7 +18,7 @@ void SetDirection() =>
     dir = input.GetDirection(() => Console.ReadKey(true).Key);
 
 Task inputTask;
-if (!isDebug)
+if (!cfg.IsDebug)
     inputTask = Task.Run(() =>
     {
         while (true)
@@ -29,11 +27,11 @@ if (!isDebug)
 
 while (true)
 {
-    if (isDebug)
+    if (cfg.IsDebug)
         SetDirection();
-    await Task.Delay(timeoutInMs);
+    await Task.Delay(cfg.TimeoutInMs);
     board.Move(dir);
-    if (board.IsGameOver(MapWidth, MapHeight))
+    if (board.IsGameOver(cfg.MapWidth, cfg.MapHeight))
         break;
-    output.Print(board.GetSnake(), MapWidth, MapHeight, board.Apple);
+    output.Print(board.GetSnake(), cfg.MapWidth, cfg.MapHeight, board.Apple);
 }

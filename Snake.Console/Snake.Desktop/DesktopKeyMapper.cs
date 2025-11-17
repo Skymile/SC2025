@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 
-using Snake.Core;
+using Snake.Core.Enums;
+using Snake.Core.Interfaces;
 
 namespace Snake.Desktop
 {

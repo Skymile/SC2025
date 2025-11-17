@@ -1,5 +1,4 @@
-﻿
-using Snake;
+﻿using Snake.Core.Models;
 
 public class Display : IDisplay
 {
