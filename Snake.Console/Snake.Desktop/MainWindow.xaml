@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Snake.Desktop"
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
-        Title="MainWindow" Height="450" Width="800">
+        WindowState="Maximized"
+        Title="MainWindow">
     <Grid>
 
     </Grid>
