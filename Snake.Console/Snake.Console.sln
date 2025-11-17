@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snake.Console", "Snake.Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snake.Core", "Snake.Core\Snake.Core.csproj", "{E0F01F6A-5BE4-479F-A0D7-70FDC6A6C21F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snake.Desktop", "Snake.Desktop\Snake.Desktop.csproj", "{15FD36DB-1DDC-4A71-A723-18A60AE098CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E0F01F6A-5BE4-479F-A0D7-70FDC6A6C21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0F01F6A-5BE4-479F-A0D7-70FDC6A6C21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0F01F6A-5BE4-479F-A0D7-70FDC6A6C21F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15FD36DB-1DDC-4A71-A723-18A60AE098CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15FD36DB-1DDC-4A71-A723-18A60AE098CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15FD36DB-1DDC-4A71-A723-18A60AE098CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15FD36DB-1DDC-4A71-A723-18A60AE098CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

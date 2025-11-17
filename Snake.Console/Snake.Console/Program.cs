@@ -9,13 +9,13 @@ const int MapWidth = 30;
 const int MapHeight = 20;
 
 Console.CursorVisible = false;
-var input = new Input();
+var input = new Input<ConsoleKey>(new ConsoleKeyMapper());
 var output = new Display();
 var board = new Board();
 
 while (true)
 {
-    var dir = input.GetDirection();
+    var dir = input.GetDirection(() => Console.ReadKey(true).Key);
     board.Move(dir);
     if (board.IsGameOver(MapWidth, MapHeight))
         break;

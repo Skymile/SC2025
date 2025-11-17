@@ -1,22 +1,16 @@
-﻿namespace Snake;
+﻿using Snake.Core;
 
-public class Input
+namespace Snake;
+
+public class Input<T>(IKeyMapper<T> mapper)
 {
-    public Direction GetDirection() =>
-        dir = Console.ReadKey(true).Key switch
+    public Direction GetDirection(Func<T> getKey) =>
+        dir = mapper.ToUserAction(getKey()) switch
         {
-            ConsoleKey.D or ConsoleKey.RightArrow
-                 when dir != Direction.Left
-                    => Direction.Right,
-            ConsoleKey.A or ConsoleKey.LeftArrow
-                 when dir != Direction.Right
-                    => Direction.Left,
-            ConsoleKey.W or ConsoleKey.UpArrow
-                 when dir != Direction.Down
-                    => Direction.Up,
-            ConsoleKey.S or ConsoleKey.DownArrow
-                 when dir != Direction.Up
-                    => Direction.Down,
+            UserAction.GoRight when dir != Direction.Left  => Direction.Right,
+            UserAction.GoLeft  when dir != Direction.Right => Direction.Left,
+            UserAction.GoUp    when dir != Direction.Down  => Direction.Up,
+            UserAction.GoDown  when dir != Direction.Up    => Direction.Down,
             _ => dir
         };
 
