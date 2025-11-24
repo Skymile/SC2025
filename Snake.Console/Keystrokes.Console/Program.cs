@@ -1,11 +1,18 @@
 ﻿
 using System.Globalization;
 
+using Keystrokes.Console;
+
 const string inputDir = "../../../Keystrokes";
 
-Console.WriteLine(
-    Directory.EnumerateFiles(inputDir).Count()
-);
+Console.WriteLine(string.Join(
+    Environment.NewLine,
+    FileHandler
+        .FromDirectory(inputDir)
+        .Select(sample => $"{sample.UserId}: {sample.DwellTimes.Average()}")
+));
+//    from sample in FileHandler.FromDirectory(inputDir)
+//    select $"{sample.UserId}: {sample.DwellTimes.Average()}"
 
 namespace Keystrokes.Console
 {
@@ -53,7 +60,7 @@ namespace Keystrokes.Console
     public static class FileHandler
     {
         public static Sample? FromFile(string filePath) =>
-            string.IsNullOrWhiteSpace(filePath) &&
+            !string.IsNullOrWhiteSpace(filePath) &&
             File.Exists(filePath) &&
             Path.GetFileNameWithoutExtension(filePath)
                 .Split('_')
@@ -66,5 +73,11 @@ namespace Keystrokes.Console
                             .Where(i => i is not null)!]
                 )
                 : null;
+
+        public static IEnumerable<Sample> FromDirectory(string directory) =>
+            from file in Directory.EnumerateFiles(directory)
+            let sample = FromFile(file)
+            where sample is not null
+            select sample;
     }
 }
