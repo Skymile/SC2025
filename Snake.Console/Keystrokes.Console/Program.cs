@@ -1,5 +1,5 @@
-﻿
-using System.Globalization;
+﻿using System.Globalization;
+using System.Linq.Expressions;
 
 using Keystrokes.Console;
 
@@ -7,12 +7,9 @@ const string inputDir = "../../../Keystrokes";
 
 Console.WriteLine(string.Join(
     Environment.NewLine,
-    FileHandler
-        .FromDirectory(inputDir)
-        .Select(sample => $"{sample.UserId}: {sample.DwellTimes.Average()}")
+    from sample in FileHandler.FromDirectory(inputDir)
+    select $"{sample.UserId}: {sample.DwellTimes.Average()}"
 ));
-//    from sample in FileHandler.FromDirectory(inputDir)
-//    select $"{sample.UserId}: {sample.DwellTimes.Average()}"
 
 namespace Keystrokes.Console
 {
@@ -79,5 +76,63 @@ namespace Keystrokes.Console
             let sample = FromFile(file)
             where sample is not null
             select sample;
+    }
+
+    public delegate double Distance(
+        double[] first, 
+        double[] second
+    );
+
+    public static class DistanceMetrics
+    {
+        public static readonly Distance Euclidean = (f, s) =>
+            Math.Sqrt(f.Zip(s, (i, j) => i - j).Sum(i => i * i));
+
+        public static readonly Distance Manhattan = (f, s) =>
+            f.Zip(s, (i, j) => Math.Abs(i - j)).Sum();
+
+        public static readonly Distance Chebyshev = (f, s) =>
+            f.Zip(s, (i, j) => Math.Abs(i - j)).Max();
+
+        public static readonly Distance Canberra = (f, s) =>
+            f.Zip(s, (i, j) => Math.Abs(i - j) / (i + j)).Sum();
+
+        public static readonly Distance Sum = (f, s) =>
+            f.Zip(s, (i, j) => i + j).Sum();
+
+        public static readonly Distance Min = (f, s) =>
+            f.Zip(s, (i, j) => Math.Min(i, j)).Sum();
+
+        public static readonly Distance BrayCurtis = (f, s) =>
+            1.0 - 2.0 * Min(f, s) / Sum(f, s);
+    }
+
+    public delegate string Classifier(
+        Sample current,
+        Sample[] training,
+        Distance distance
+    );
+
+    public static class Classifiers
+    {   
+        public static Classifier KNN(int k) =>
+            (current, training, distance) => (
+               from j in (
+                        from i in training
+                        let dist = distance(
+                            current.DwellTimes,
+                            i.DwellTimes)
+                        orderby dist
+                        select (Distance: dist, Id: i.UserId)
+                    ).Take(k)
+               group j by j.Id into p
+               orderby p.Count() descending
+               select p.First()
+            ).First().Id;
+    }
+
+    public static class Predictor
+    {
+
     }
 }
