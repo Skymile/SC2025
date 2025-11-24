@@ -1,14 +1,36 @@
 ﻿using System.Globalization;
-using System.Linq.Expressions;
 
 using Keystrokes.Console;
 
 const string inputDir = "../../../Keystrokes";
 
+var samples = FileHandler
+    .FromDirectory(inputDir)
+    .ToArray();
+
+var kValues = Enumerable
+    .Range(1, 10)
+    .Select(i => i * 2 - 1)
+    .ToArray();
+
+(string Name, Distance Metric)[] metrics = [
+        (nameof(DistanceMetrics.Euclidean ), DistanceMetrics.Euclidean ),
+        (nameof(DistanceMetrics.Manhattan ), DistanceMetrics.Manhattan ),
+        (nameof(DistanceMetrics.Chebyshev ), DistanceMetrics.Chebyshev ),
+        (nameof(DistanceMetrics.Canberra  ), DistanceMetrics.Canberra  ),
+        (nameof(DistanceMetrics.Sum       ), DistanceMetrics.Sum       ),
+        (nameof(DistanceMetrics.Min       ), DistanceMetrics.Min       ),
+        (nameof(DistanceMetrics.BrayCurtis), DistanceMetrics.BrayCurtis)
+];
+
 Console.WriteLine(string.Join(
     Environment.NewLine,
-    from sample in FileHandler.FromDirectory(inputDir)
-    select $"{sample.UserId}: {sample.DwellTimes.Average()}"
+    from metric in metrics
+    from k in kValues
+    let knn = Classifiers.KNN(k)
+    select Display.ComputeAccuracy(
+        $"{k} - {metric.Name}: ", samples, metric.Metric, knn
+    )
 ));
 
 namespace Keystrokes.Console
@@ -133,6 +155,31 @@ namespace Keystrokes.Console
 
     public static class Predictor
     {
+        public static IEnumerable<bool> LeaveOneOut(
+                Sample[] samples,
+                Distance distance,
+                Classifier classifier
+            ) =>
+            from sample in samples
+            let training = samples
+                .Where(i => i != sample)
+                .ToArray()
+            let acc = classifier(sample, training, distance)
+            select acc == sample.UserId;
+    }
 
+    public static class Display
+    {
+        public static string ComputeAccuracy(
+                string tag,
+                Sample[] samples,
+                Distance distance,
+                Classifier classifier
+            ) => string.Concat(
+                tag.PadLeft(16, ' '),
+                (Predictor.LeaveOneOut(samples, distance, classifier)
+                    .Count(i => i) / (double)samples.Length
+                ).ToString("0.00%").PadLeft(16, ' ')
+            );
     }
 }
