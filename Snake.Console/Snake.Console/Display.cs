@@ -1,25 +1,23 @@
 ﻿using Snake.Core.Models;
 
-public class Display : IDisplay
+public class Display(IConfig cfg) : IDisplay
 {
     public void Print(
             IEnumerable<Point> snake,
-            int mapWidth,
-            int mapHeight,
             Point apple
         )
     {
         var head = snake.First();
         Console.Clear();
-        string wallLine = new('#', mapWidth * 2 + 1);
+        string wallLine = new('#', cfg.MapWidth * 2 + 1);
         Console.Write(wallLine);
-        Console.SetCursorPosition(0, mapHeight);
+        Console.SetCursorPosition(0, cfg.MapHeight);
         Console.Write(wallLine);
-        for (int i = 1; i < mapHeight; i++)
+        for (int i = 1; i < cfg.MapHeight; i++)
         {
             Console.SetCursorPosition(0, i);
             Console.Write('#');
-            Console.SetCursorPosition(mapWidth * 2, i);
+            Console.SetCursorPosition(cfg.MapWidth * 2, i);
             Console.Write('#');
         }
 

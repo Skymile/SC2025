@@ -11,12 +11,15 @@ using Snake.Core.Services;
 Console.CursorVisible = false;
 
 var ioc = new IoC()
-    .RegisterSingleton<Display, Display>()
-    .RegisterSingleton<Config, Config>()
-    .RegisterSingleton<Board, Board>()
-    .RegisterSingleton<IKeyMapper<ConsoleKey>, ConsoleKeyMapper>();
-
-var cfg    = ioc.Inject<Config>();
+    .Set(IoCLifetime.Transient)
+        .Register<IConfig, Config>()
+    .Set(IoCLifetime.Singleton)
+        .Register<Board, Board>()
+        .Register<Display, Display>()
+        .Register<IKeyMapper<ConsoleKey>, ConsoleKeyMapper>()
+        ;
+    
+var cfg    = ioc.Inject<IConfig>();
 var output = ioc.Inject<Display>();
 var board  = ioc.Inject<Board>();
 var input  = new InputService<ConsoleKey>(ioc.Inject<IKeyMapper<ConsoleKey>>());
@@ -41,5 +44,5 @@ while (true)
     board.Move(dir);
     if (board.IsGameOver(cfg.MapWidth, cfg.MapHeight))
         break;
-    output.Print(board.GetSnake(), cfg.MapWidth, cfg.MapHeight, board.Apple);
+    output.Print(board.GetSnake(), board.Apple);
 }
