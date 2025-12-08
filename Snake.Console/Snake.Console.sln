@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keystrokes.Console", "Keyst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Showcase", "Showcase\Showcase.csproj", "{70662EC0-DD71-4783-9A9D-1BF0420547E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biometrics", "Biometrics\Biometrics.csproj", "{2246BAAD-1D60-4A5D-B5A4-F17895B4BD81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{70662EC0-DD71-4783-9A9D-1BF0420547E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70662EC0-DD71-4783-9A9D-1BF0420547E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70662EC0-DD71-4783-9A9D-1BF0420547E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2246BAAD-1D60-4A5D-B5A4-F17895B4BD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2246BAAD-1D60-4A5D-B5A4-F17895B4BD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2246BAAD-1D60-4A5D-B5A4-F17895B4BD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2246BAAD-1D60-4A5D-B5A4-F17895B4BD81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
