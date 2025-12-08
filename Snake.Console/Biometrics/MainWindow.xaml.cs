@@ -3,15 +3,6 @@ using System.Windows;
 
 namespace Biometrics
 {
-    public class Localization
-    {
-        private Localization() { }
-
-        public static Localization Instance { get; } = new();
-
-        public string Title => "Biometrics Application";
-    }
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
