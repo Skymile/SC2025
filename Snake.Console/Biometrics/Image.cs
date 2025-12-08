@@ -3,6 +3,26 @@ using System.Drawing.Imaging;
 
 namespace Biometrics;
 
+public class Grayscale : Algorithm
+{
+    public override unsafe void Apply(byte* read, byte* write, int length, int stride, int width, int height)
+    {
+        for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+            {
+                int i = x * 3 + y * stride;
+                int value =
+                    read[i + 0] +
+                    read[i + 1] +
+                    read[i + 2];
+
+                write[i + 0] =
+                write[i + 1] =
+                write[i + 2] = (byte)(value / 3);
+            }
+    }
+}
+
 public class MedianFilter : Algorithm
 {
     public override unsafe void Apply(
@@ -34,7 +54,7 @@ public class MedianFilter : Algorithm
     }
 }
 
-public abstract class Algorithm
+public abstract class Algorithm : IAlgorithm
 {
     public abstract unsafe void Apply(
         byte* read,
@@ -78,11 +98,18 @@ public abstract class Algorithm
     }
 }
 
-public class Image
+public interface IImage
 {
-    public unsafe static Bitmap Apply(Bitmap readBitmap)
+    IImage Apply(IAlgorithm algorithm);
+}
+
+public class Image(string filename) : IImage
+{
+    public IImage Apply(IAlgorithm algorithm)
     {
-        var algorithm = new MedianFilter();
-        return algorithm.Apply(readBitmap);
+        bmp = algorithm.Apply(bmp);
+        return this;
     }
+
+    internal Bitmap bmp = new(filename);
 }

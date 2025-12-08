@@ -7,6 +7,12 @@ namespace Biometrics;
 
 using MediaPixelFormats = System.Windows.Media.PixelFormats;
 
+internal static class ImageExtensions
+{
+    internal static BitmapSource ToBitmapSource(this IImage image) =>
+        BitmapExtensions.ToBitmapSource(((Image)image).bmp);
+}
+
 public static class BitmapExtensions
 {
     public static BitmapSource ToBitmapSource(this Bitmap bitmap)
