@@ -3,12 +3,50 @@ using System.Drawing.Imaging;
 
 namespace Biometrics;
 
-public class Image
+public class MedianFilter : Algorithm
 {
-    public unsafe static Bitmap Apply(Bitmap readBitmap)
+    public override unsafe void Apply(
+        byte* read, byte* write, int length, int stride, int width, int height)
     {
         int windowSize = 3;
+        var list = new List<byte>();
+        int border = windowSize / 2;
 
+        for (int k = 0; k < 3; k++)
+            for (int y = border; y < height - border; y++)
+                for (int x = border; x < width - border; x++)
+                {
+                    int i = x * 3 + y * stride;
+
+                    list.Clear();
+
+                    for (int yy = -border; yy < border; yy++)
+                        for (int xx = -border; xx < border; xx++)
+                        {
+                            int offset = xx * 3 + yy * stride;
+
+                            list.Add(read[i + offset + k]);
+                        }
+
+                    list.Sort();
+                    write[i + k] = list[list.Count / 2];
+                }
+    }
+}
+
+public abstract class Algorithm
+{
+    public abstract unsafe void Apply(
+        byte* read,
+        byte* write,
+        int length,
+        int stride,
+        int width,
+        int height
+    );
+
+    public unsafe Bitmap Apply(Bitmap readBitmap)
+    {
         var writeBitmap = new Bitmap(
             readBitmap.Width, readBitmap.Height, readBitmap.PixelFormat
         );
@@ -27,32 +65,24 @@ public class Image
         byte* read = (byte*)readData.Scan0.ToPointer();
         byte* write = (byte*)writeData.Scan0.ToPointer();
 
-        var list = new List<byte>();
-        int border = windowSize / 2;
-
-        for (int y = border; y < readBitmap.Height - border; y++)
-            for (int x = border; x < readBitmap.Width - border; x++)
-            {
-                int i = x * 3 + y * readData.Stride;
-
-                list.Clear();
-
-                for (int yy = -border; yy < border; yy++)
-                    for (int xx = -border; xx < border; xx++)
-                    {
-                        int offset = xx * 3 + yy * readData.Stride;
-
-                        list.Add(read[i + offset]);
-                    }
-
-                list.Sort();
-                write[i + 0] = 
-                write[i + 1] = 
-                write[i + 2] = list[list.Count / 2];
-            }
+        Apply(read,
+              write,
+              readData.Stride * readData.Height,
+              readData.Stride,
+              readData.Width,
+              readData.Height);
 
         readBitmap.UnlockBits(readData);
         writeBitmap.UnlockBits(writeData);
         return writeBitmap;
+    }
+}
+
+public class Image
+{
+    public unsafe static Bitmap Apply(Bitmap readBitmap)
+    {
+        var algorithm = new MedianFilter();
+        return algorithm.Apply(readBitmap);
     }
 }

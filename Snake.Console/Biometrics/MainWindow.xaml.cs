@@ -12,7 +12,9 @@ namespace Biometrics
         {
             InitializeComponent();
 
-            var bmp = Image.Apply(new Bitmap("../../../Samples/apple.png"));
+            var bmp = Image.Apply(new Bitmap("../../../Samples/apple.png"))
+                
+                ;
             MainImg.Source = bmp.ToBitmapSource();
         }
     }
