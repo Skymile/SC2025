@@ -5,28 +5,27 @@ public class MedianFilter : Algorithm
     public override unsafe void Apply(
         byte* read, byte* write, int length, int stride, int width, int height)
     {
+        const int bpp = 3;
         int windowSize = 3;
         var list = new List<byte>();
         int border = windowSize / 2;
+        int offset = bpp + stride;
 
-        for (int k = 0; k < 3; k++)
-            for (int y = border; y < height - border; y++)
-                for (int x = border; x < width - border; x++)
-                {
-                    int i = x * 3 + y * stride;
+        int[] operationOffsets = [
+            bpp * -1 + stride * -1, bpp * 0 + stride * -1, bpp * 1 + stride * -1,
+            bpp * -1 + stride *  0, bpp * 0 + stride *  0, bpp * 1 + stride *  0,
+            bpp * -1 + stride * +1, bpp * 0 + stride * +1, bpp * 1 + stride * +1,
+        ];
 
-                    list.Clear();
+        for (int i = offset; i < length - offset; i++)
+        {
+            list.Clear();
 
-                    for (int yy = -border; yy < border; yy++)
-                        for (int xx = -border; xx < border; xx++)
-                        {
-                            int offset = xx * 3 + yy * stride;
+            for (int j = 0; j < operationOffsets.Length; j++)
+                list.Add(read[i + operationOffsets[j]]);
 
-                            list.Add(read[i + offset + k]);
-                        }
-
-                    list.Sort();
-                    write[i + k] = list[list.Count / 2];
-                }
+            list.Sort();
+            write[i] = list[list.Count / 2];
+        }
     }
 }
