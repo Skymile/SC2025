@@ -1,5 +1,10 @@
 ﻿namespace Biometrics.Core;
 
+public class AbcFilter : Algorithm
+{
+    public override unsafe void Apply(byte* read, byte* write, int length, int stride, int width, int height) => throw new NotImplementedException();
+}
+
 public class MedianFilter : Algorithm
 {
     public override unsafe void Apply(

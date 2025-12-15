@@ -23,6 +23,12 @@ public class MainWindowVM : INotifyPropertyChanged
                 .Select(Path.GetFileNameWithoutExtension)
                 .OfType<string>()];
 
+        Algorithms = 
+            [.. from type in typeof(Algorithm).Assembly.GetTypes()
+                where type.IsSubclassOf(typeof(Algorithm)) && !type.IsAbstract
+                select type.Name];
+
+        SelectedAlgorithm = Algorithms[0];
         SelectedFile = Files[0];
         SelectedWindow = Windows[0];
     }
@@ -37,16 +43,13 @@ public class MainWindowVM : INotifyPropertyChanged
         })
         ;
 
-    private void Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        field = value;
-        PropertyChanged?.Invoke(this, new(propertyName));
-    }
-
     public string SelectedFile   { get => field; set => Set(ref field, value); }
     public string SelectedWindow { get => field; set => Set(ref field, value); }
     public string[] Files        { get => field; set => Set(ref field, value); }
     public string[] Windows      { get => field; set => Set(ref field, value); } = windowDict.Keys.ToArray();
+
+    public string[] Algorithms { get => field; set => Set(ref field, value); }
+    public string SelectedAlgorithm { get; set; }
 
     private static readonly Dictionary<string, double[]> windowDict = typeof(Window3x3)
         .GetFields(BindingFlags.Public | BindingFlags.Static)
@@ -55,4 +58,10 @@ public class MainWindowVM : INotifyPropertyChanged
     private readonly Dictionary<string, string> fileToPath = [];
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void Set<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        field = value;
+        PropertyChanged?.Invoke(this, new(propertyName));
+    }
 }

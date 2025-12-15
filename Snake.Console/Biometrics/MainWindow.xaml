@@ -19,6 +19,10 @@
                 SelectedItem="{Binding SelectedFile}"
                 ItemsSource="{Binding Files}"/>
             <ComboBox
+                SelectedItem="{Binding SelectedAlgorithm}"
+                ItemsSource="{Binding Algorithms}"
+                />
+            <ComboBox
                 SelectionChanged="ComboBoxWindow_SelectionChanged"
                 SelectedItem="{Binding SelectedWindow}"
                 ItemsSource="{Binding Windows}"/>
