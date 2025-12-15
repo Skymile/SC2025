@@ -16,11 +16,11 @@
         <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
             <ComboBox 
                 SelectionChanged="ComboBox_SelectionChanged"
-                SelectedIndex="{Binding SelectedFile}"
+                SelectedItem="{Binding SelectedFile}"
                 ItemsSource="{Binding Files}"/>
             <ComboBox
                 SelectionChanged="ComboBoxWindow_SelectionChanged"
-                SelectedIndex="{Binding SelectedWindow}"
+                SelectedItem="{Binding SelectedWindow}"
                 ItemsSource="{Binding Windows}"/>
         </StackPanel>
         <Image 
