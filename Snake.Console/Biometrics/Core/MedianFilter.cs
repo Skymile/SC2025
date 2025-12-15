@@ -1,5 +1,43 @@
 ﻿namespace Biometrics.Core;
 
+public class ConvolutionFilter(
+        params double[][] matrices
+    ) : Algorithm
+{
+    public double Sensitivity { get; set; } = 1.0;
+
+    public override unsafe void Apply(
+        byte* read, byte* write, int length, int stride, int width, int height)
+    {
+        int windowSize = 3;
+        const int bpp = 3;
+        int border = windowSize / 2;
+        int offset = bpp + stride;
+
+        int* operations = stackalloc int[windowSize * windowSize];
+        OperationMatrix.GetStandard3x3(operations, bpp, stride);
+
+        for (int i = offset; i < length - offset; i++)
+        {
+            double val = 0;
+
+            for (int m = 0; m < matrices.Length; m++)
+            {
+                var matrix = matrices[m];   
+                double sum = matrix.Sum();
+                if ((int)(sum * 100) == 0) 
+                    sum = 1;
+            
+                for (int j = 0; j < 9; j++)
+                    val += read[i + operations[j]] * matrix[j];
+                val /= sum;
+            }
+
+            write[i] = (byte)double.Clamp(val * Sensitivity, 0, 255);
+        }
+    }
+}
+
 public class MedianFilter : Algorithm
 {
     public override unsafe void Apply(
@@ -11,18 +49,15 @@ public class MedianFilter : Algorithm
         int border = windowSize / 2;
         int offset = bpp + stride;
 
-        int[] operationOffsets = [
-            bpp * -1 + stride * -1, bpp * 0 + stride * -1, bpp * 1 + stride * -1,
-            bpp * -1 + stride *  0, bpp * 0 + stride *  0, bpp * 1 + stride *  0,
-            bpp * -1 + stride * +1, bpp * 0 + stride * +1, bpp * 1 + stride * +1,
-        ];
+        int* operations = stackalloc int[windowSize * windowSize];
+        OperationMatrix.GetStandard3x3(operations, bpp, stride);
 
         for (int i = offset; i < length - offset; i++)
         {
             list.Clear();
 
-            for (int j = 0; j < operationOffsets.Length; j++)
-                list.Add(read[i + operationOffsets[j]]);
+            for (int j = 0; j < 9; j++)
+                list.Add(read[i + operations[j]]);
 
             list.Sort();
             write[i] = list[list.Count / 2];
