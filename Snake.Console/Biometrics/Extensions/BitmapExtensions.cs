@@ -3,8 +3,12 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
 
-namespace Biometrics;
+using Biometrics.Extensions;
+using Biometrics.ImageProcessing;
 
+namespace Biometrics.Extensions;
+
+using Image = ImageProcessing.Image;
 using MediaPixelFormats = System.Windows.Media.PixelFormats;
 
 internal static class ImageExtensions

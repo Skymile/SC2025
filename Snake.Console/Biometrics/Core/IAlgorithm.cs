@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Biometrics;
+namespace Biometrics.Core;
 
 public interface IAlgorithm
 {

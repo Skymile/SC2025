@@ -1,6 +1,10 @@
 ﻿using System.IO;
 using System.Windows;
 
+using Biometrics.Core;
+using Biometrics.Extensions;
+using Biometrics.ImageProcessing;
+
 namespace Biometrics
 {
     /// <summary>

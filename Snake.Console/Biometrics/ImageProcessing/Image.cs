@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
 
-namespace Biometrics;
+using Biometrics.Core;
+
+namespace Biometrics.ImageProcessing;
 
 public class Image(string filename) : IImage
 {

@@ -1,4 +1,4 @@
-﻿namespace Biometrics;
+﻿namespace Biometrics.Core;
 
 public class MedianFilter : Algorithm
 {

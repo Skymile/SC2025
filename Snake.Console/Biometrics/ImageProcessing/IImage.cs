@@ -1,4 +1,6 @@
-﻿namespace Biometrics;
+﻿using Biometrics.Core;
+
+namespace Biometrics.ImageProcessing;
 
 public interface IImage
 {

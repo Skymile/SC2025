@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Biometrics;
+namespace Biometrics.Core;
 
 public abstract class Algorithm : IAlgorithm
 {
