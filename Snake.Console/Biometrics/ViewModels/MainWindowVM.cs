@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
-using System.IO;
-using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 using Biometrics.Core;
 using Biometrics.ImageProcessing;
@@ -10,34 +9,35 @@ namespace Biometrics.ViewModels;
 
 public class MainWindowVM : INotifyPropertyChanged
 {
-    public MainWindowVM()
+    public MainWindowVM(IAlgorithmService algoService)
     {
-        fileToPath = Directory.EnumerateFiles("../../../Samples/")
-            .ToDictionary(
-                i => Path.GetFileNameWithoutExtension(i)
-                    ?? throw new NullReferenceException(),
-                i => i
-            );
+        const string path = "../../../Samples/";
+        this.algoService = algoService;
+        fileToPath = algoService.GetFileToPathMap(path);
+        Files = algoService.GetFilenames(path);
+        Algorithms = algoService.GetAlgorithmNames();
 
-        Files = [.. Directory.EnumerateFiles("../../../Samples/")
-                .Select(Path.GetFileNameWithoutExtension)
-                .OfType<string>()];
+        SelectionChanged = new Command(_ => RefreshImage?.Invoke());
+        WindowSelectionChanged = new Command(_ => RefreshImage?.Invoke());
 
-        Algorithms = 
-            [.. from type in typeof(Algorithm).Assembly.GetTypes()
-                where type.IsSubclassOf(typeof(Algorithm)) && !type.IsAbstract
-                select type.Name];
+        var windowDict = algoService.GetAlgorithmWindows();
+        Windows = windowDict.Keys.ToArray();
 
         SelectedAlgorithm = Algorithms[0];
         SelectedFile = Files[0];
         SelectedWindow = Windows[0];
     }
 
+    public Action? RefreshImage { get; set; }
+
+    public ICommand SelectionChanged { get; set; }
+    public ICommand WindowSelectionChanged { get; set; }
+
     public IImage GetImage() => new Image(fileToPath[SelectedFile])
         .Apply(new Grayscale())
         .Apply(new MedianFilter())
         .Apply(new MedianFilter())
-        .Apply(new ConvolutionFilter(windowDict[SelectedWindow])
+        .Apply(new ConvolutionFilter(algoService.GetAlgorithmWindows()[SelectedWindow])
         {
             Sensitivity = 1.0
         })
@@ -46,15 +46,12 @@ public class MainWindowVM : INotifyPropertyChanged
     public string SelectedFile   { get => field; set => Set(ref field, value); }
     public string SelectedWindow { get => field; set => Set(ref field, value); }
     public string[] Files        { get => field; set => Set(ref field, value); }
-    public string[] Windows      { get => field; set => Set(ref field, value); } = windowDict.Keys.ToArray();
+    public string[] Windows      { get => field; set => Set(ref field, value); }
 
     public string[] Algorithms { get => field; set => Set(ref field, value); }
     public string SelectedAlgorithm { get; set; }
 
-    private static readonly Dictionary<string, double[]> windowDict = typeof(Window3x3)
-        .GetFields(BindingFlags.Public | BindingFlags.Static)
-        .ToDictionary(i => i.Name, i => (double[])i.GetValue(null)!);
-
+    private readonly IAlgorithmService algoService;
     private readonly Dictionary<string, string> fileToPath = [];
 
     public event PropertyChangedEventHandler? PropertyChanged;

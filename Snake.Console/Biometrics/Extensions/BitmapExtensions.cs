@@ -3,7 +3,6 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
 
-using Biometrics.Extensions;
 using Biometrics.ImageProcessing;
 
 namespace Biometrics.Extensions;

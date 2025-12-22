@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Biometrics"
         mc:Ignorable="d"
         Title="MainWindow" 
@@ -15,17 +16,27 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
             <ComboBox 
-                SelectionChanged="ComboBox_SelectionChanged"
                 SelectedItem="{Binding SelectedFile}"
-                ItemsSource="{Binding Files}"/>
+                ItemsSource="{Binding Files}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectionChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
             <ComboBox
                 SelectedItem="{Binding SelectedAlgorithm}"
                 ItemsSource="{Binding Algorithms}"
                 />
             <ComboBox
-                SelectionChanged="ComboBoxWindow_SelectionChanged"
                 SelectedItem="{Binding SelectedWindow}"
-                ItemsSource="{Binding Windows}"/>
+                ItemsSource="{Binding Windows}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding WindowSelectionChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
         </StackPanel>
         <Image 
             Grid.Column="1"

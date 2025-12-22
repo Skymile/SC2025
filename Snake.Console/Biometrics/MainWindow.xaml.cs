@@ -10,21 +10,17 @@ namespace Biometrics
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowVM vm)
         {
             InitializeComponent();
             this.Title = Localization.Instance.Title;
-            this.DataContext = new MainWindowVM();
+            vm.RefreshImage = InitializeImage;
+            this.DataContext = vm;
+            InitializeImage();
         }
 
-        public void InitializeImage() =>
+        private void InitializeImage() =>
             MainImg.Source = vm.GetImage().ToBitmapSource();
-
-        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) =>
-            InitializeImage();
-
-        private void ComboBoxWindow_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) =>
-            InitializeImage();
 
         private MainWindowVM vm => (MainWindowVM)DataContext;
     }
