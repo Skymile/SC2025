@@ -1,4 +1,5 @@
 ﻿using Biometrics.DI;
+using Biometrics.Services;
 using Biometrics.ViewModels;
 
 namespace Biometrics

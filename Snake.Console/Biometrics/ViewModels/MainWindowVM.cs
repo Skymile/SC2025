@@ -4,6 +4,7 @@ using System.Windows.Input;
 
 using Biometrics.Core;
 using Biometrics.ImageProcessing;
+using Biometrics.Services;
 
 namespace Biometrics.ViewModels;
 
@@ -24,7 +25,7 @@ public class MainWindowVM : INotifyPropertyChanged
         Windows = windowDict.Keys.ToArray();
 
         SelectedAlgorithm = Algorithms[0];
-        SelectedFile = Files[0];
+        SelectedFile = Files[4];
         SelectedWindow = Windows[0];
     }
 
@@ -34,13 +35,15 @@ public class MainWindowVM : INotifyPropertyChanged
     public ICommand WindowSelectionChanged { get; set; }
 
     public IImage GetImage() => new Image(fileToPath[SelectedFile])
-        .Apply(new Grayscale())
-        .Apply(new MedianFilter())
-        .Apply(new MedianFilter())
-        .Apply(new ConvolutionFilter(algoService.GetAlgorithmWindows()[SelectedWindow])
-        {
-            Sensitivity = 1.0
-        })
+        //.Apply(new MedianFilter())
+        //.Apply(new MedianFilter())
+        //.Apply(new ThresholdBinarization() { Threshold = 100 })
+        .Apply(new ZhangSuenThinning())
+        //.Apply(new Grayscale())
+        //.Apply(new ConvolutionFilter(algoService.GetAlgorithmWindows()[SelectedWindow])
+        //{
+        //    Sensitivity = 1.0
+        //})
         ;
 
     public string SelectedFile   { get => field; set => Set(ref field, value); }

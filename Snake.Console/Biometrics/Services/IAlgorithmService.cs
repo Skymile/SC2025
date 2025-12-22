@@ -1,5 +1,4 @@
-﻿
-namespace Biometrics.ViewModels
+﻿namespace Biometrics.Services
 {
     public interface IAlgorithmService
     {

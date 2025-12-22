@@ -3,7 +3,7 @@ using System.Reflection;
 
 using Biometrics.Core;
 
-namespace Biometrics.ViewModels;
+namespace Biometrics.Services;
 
 public class AlgorithmService : IAlgorithmService
 {
