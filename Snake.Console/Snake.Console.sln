@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biometrics", "Biometrics\Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarking", "Benchmarking\Benchmarking.csproj", "{C9A42130-3D9A-48E6-A73C-EF4F9DF09FEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{3767C15A-1A1A-4692-AC0F-A92862C4C2FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C9A42130-3D9A-48E6-A73C-EF4F9DF09FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9A42130-3D9A-48E6-A73C-EF4F9DF09FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9A42130-3D9A-48E6-A73C-EF4F9DF09FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3767C15A-1A1A-4692-AC0F-A92862C4C2FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3767C15A-1A1A-4692-AC0F-A92862C4C2FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3767C15A-1A1A-4692-AC0F-A92862C4C2FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3767C15A-1A1A-4692-AC0F-A92862C4C2FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
