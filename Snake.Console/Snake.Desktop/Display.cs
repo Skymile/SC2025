@@ -54,6 +54,7 @@ public class Display : IDisplay
         new() { Width = new GridLength(CellSize, GridUnitType.Pixel) };
     private static RowDefinition CreateRowDefinition() =>
         new() { Height = new GridLength(CellSize, GridUnitType.Pixel) };
+    public void Print(IEnumerable<Point> snake, Point apple) => throw new NotImplementedException();
 
     private const int CellSize = 50;
 
