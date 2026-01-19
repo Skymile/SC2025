@@ -20,6 +20,13 @@ public class AlgorithmService : IAlgorithmService
                 i => i
             );
 
+    public Type GetAlgorithmType(string name) =>
+        (algorithmDict ??= typeof(Algorithm).Assembly
+            .GetTypes()
+            .Where(type => type.IsSubclassOf(typeof(Algorithm)) && !type.IsAbstract)
+            .ToDictionary(type => type.Name, type => type)
+        )[name];
+
     public string[] GetAlgorithmNames() =>
         [.. from type in typeof(Algorithm).Assembly.GetTypes()
             where type.IsSubclassOf(typeof(Algorithm)) && !type.IsAbstract
@@ -31,4 +38,5 @@ public class AlgorithmService : IAlgorithmService
             .ToDictionary(i => i.Name, i => (double[])i.GetValue(null)!);
 
     private static Dictionary<string, double[]>? windowDict;
+    private static Dictionary<string, Type> algorithmDict;
 }

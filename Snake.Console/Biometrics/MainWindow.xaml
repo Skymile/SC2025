@@ -15,6 +15,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="10" Orientation="Vertical">
+            <StackPanel Name="AlgorithmConfig" Margin="16"/>
             <ComboBox 
                 SelectedItem="{Binding SelectedFile}"
                 ItemsSource="{Binding Files}">

@@ -15,7 +15,7 @@ public class ConvolutionFilter(
         int offset = bpp + stride;
 
         int* operations = stackalloc int[windowSize * windowSize];
-        OperationMatrix.GetStandard3x3(operations, bpp, stride);
+        OperationMatrix.GetStandard3x3(operations, bpp, stride);    
 
         for (int i = offset; i < length - offset; i++)
         {

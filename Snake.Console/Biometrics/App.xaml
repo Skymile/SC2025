@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:Biometrics"
              Startup="Application_Startup">
     <Application.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="32" />
+        </Style>
         <Style TargetType="ComboBoxItem">
             <Setter Property="FontSize" Value="32" />
         </Style>

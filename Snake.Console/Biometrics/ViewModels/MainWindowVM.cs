@@ -52,7 +52,15 @@ public class MainWindowVM : INotifyPropertyChanged
     public string[] Windows      { get => field; set => Set(ref field, value); }
 
     public string[] Algorithms { get => field; set => Set(ref field, value); }
-    public string SelectedAlgorithm { get; set; }
+    public string SelectedAlgorithm 
+    { 
+        get => field; 
+        set
+        {
+            Set(ref field, value);
+            RefreshImage?.Invoke();
+        }
+    }
 
     private readonly IAlgorithmService algoService;
     private readonly Dictionary<string, string> fileToPath = [];
