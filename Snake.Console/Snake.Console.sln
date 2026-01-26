@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biometrics.xTests", "Biomet
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Biometrics.pTests", "Biometrics.pTests\Biometrics.pTests.fsproj", "{2A006EC8-C091-4820-BFB7-381F2B770C9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biometrics.Validations", "Biometrics.Validations\Biometrics.Validations.csproj", "{28DFE9BA-AD14-47EF-BB83-6958A2E58598}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{2A006EC8-C091-4820-BFB7-381F2B770C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A006EC8-C091-4820-BFB7-381F2B770C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A006EC8-C091-4820-BFB7-381F2B770C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28DFE9BA-AD14-47EF-BB83-6958A2E58598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28DFE9BA-AD14-47EF-BB83-6958A2E58598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28DFE9BA-AD14-47EF-BB83-6958A2E58598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28DFE9BA-AD14-47EF-BB83-6958A2E58598}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

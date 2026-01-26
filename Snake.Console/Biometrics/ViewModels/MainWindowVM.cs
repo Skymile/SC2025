@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 using Biometrics.Core;
+using Biometrics.Core.Algorithms;
 using Biometrics.ImageProcessing;
 using Biometrics.Services;
 
@@ -25,7 +26,7 @@ public class MainWindowVM : INotifyPropertyChanged
         Windows = windowDict.Keys.ToArray();
 
         SelectedAlgorithm = Algorithms[0];
-        SelectedFile = Files[4];
+        SelectedFile = Files[0];
         SelectedWindow = Windows[0];
     }
 
@@ -35,11 +36,12 @@ public class MainWindowVM : INotifyPropertyChanged
     public ICommand WindowSelectionChanged { get; set; }
 
     public IImage GetImage() => new Image(fileToPath[SelectedFile])
-        //.Apply(new MedianFilter())
-        //.Apply(new MedianFilter())
+        .Apply(new MedianFilter())
+        .Apply(new MedianFilter())
+        .Apply(new Grayscale())
         //.Apply(new ThresholdBinarization() { Threshold = 100 })
-        .Apply(new ZhangSuenThinning())
-        //.Apply(new Grayscale())
+        .Apply(new PhansalkarBinarization())
+        //.Apply(new ZhangSuenThinning())
         //.Apply(new ConvolutionFilter(algoService.GetAlgorithmWindows()[SelectedWindow])
         //{
         //    Sensitivity = 1.0

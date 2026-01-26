@@ -1,4 +1,4 @@
-﻿namespace Biometrics.Core;
+﻿namespace Biometrics.Core.Algorithms;
 
 public class ConvolutionFilter(
         params double[][] matrices

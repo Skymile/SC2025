@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Biometrics.Core;
+namespace Biometrics.Core.Algorithms;
 
 public class ZhangSuenThinning : Algorithm
 {

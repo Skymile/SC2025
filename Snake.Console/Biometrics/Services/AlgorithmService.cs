@@ -38,5 +38,5 @@ public class AlgorithmService : IAlgorithmService
             .ToDictionary(i => i.Name, i => (double[])i.GetValue(null)!);
 
     private static Dictionary<string, double[]>? windowDict;
-    private static Dictionary<string, Type> algorithmDict;
+    private static Dictionary<string, Type>? algorithmDict;
 }
