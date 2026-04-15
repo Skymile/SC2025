@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biometrics.Validations", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Showcase2026", "Showcase2026\Showcase2026.csproj", "{9D93E109-89C1-4EDD-8BCC-259096246174}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino", "Casino\Casino.csproj", "{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,18 @@ Global
 		{9D93E109-89C1-4EDD-8BCC-259096246174}.Release|x64.Build.0 = Release|Any CPU
 		{9D93E109-89C1-4EDD-8BCC-259096246174}.Release|x86.ActiveCfg = Release|Any CPU
 		{9D93E109-89C1-4EDD-8BCC-259096246174}.Release|x86.Build.0 = Release|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Debug|x64.Build.0 = Debug|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Debug|x86.Build.0 = Debug|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Release|x64.ActiveCfg = Release|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Release|x64.Build.0 = Release|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Release|x86.ActiveCfg = Release|Any CPU
+		{603A1E51-CDA1-4B24-8E94-3A96E5EC38C1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
