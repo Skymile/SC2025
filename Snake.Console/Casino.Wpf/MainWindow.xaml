@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid ColumnDefinitions="Auto,*">
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Margin="10">
             <Label Width="192" Height="64" 
                    Background="Green" 
                    Foreground="White"
@@ -27,16 +27,30 @@
                     FontSize="32"
                     Width="192"
                     Content="Place Bet"
-                    Click="Bet_Click"/>
-                <Label x:Name="CapitalLeft" FontSize="32"/>
-                <Slider x:Name="BetSlider" 
-                        Width="250"
-                        Minimum="100" Maximum="10000" 
-                        ValueChanged="BetSlider_ValueChanged"
-                        />
-                <Label x:Name="BetAmount" FontSize="32"/>
+                    IsEnabled="{Binding IsBetPlacingAllowed}"
+                    BorderThickness="0"
+                    Margin="10"
+                    Padding="10"
+                    Command="{Binding BetPlacedCommand}"/>
+                <Label 
+                    FontSize="32"
+                    Margin="10"
+                    Padding="10"
+                    VerticalAlignment="Center"
+                    Content="{Binding CapitalLeft}"
+                    Foreground="{Binding CapitalLeftColor}"
+                       />
+                <Slider 
+                    Margin="10"
+                    Padding="10"
+                    VerticalAlignment="Center"
+                    Width="250"
+                    Minimum="100" Maximum="10000" 
+                    Value="{Binding BetAmount}" />
+                <Label Content="{Binding BetAmount}" FontSize="32"/>
             </StackPanel>
             <TextBox 
+                Margin="10"
                 x:Name="MainTextBox"
                 Grid.Row="1"
                 FontSize="32"
