@@ -9,6 +9,12 @@ public class MainViewModel(
         RouletteAggregate roulette
     ) : ReactiveBase
 {
+    public void CapitalTooLow() =>
+        outputService.WriteMessage("You have too low capital to place the bet!");
+
+    public void Broke() =>
+        outputService.WriteMessage("You have no money left!");
+
     public void PlaceBet(Player player, Bet bet) =>
         SendEvent(new BetPlaced(player, bet));
 
@@ -21,6 +27,9 @@ public class MainViewModel(
     public void WriteBoard() =>
         outputService.WriteBoard(roulette);
 
+    public void WritePlayerCapital(Player player) =>
+        outputService.WritePlayerCapital(player);
+
     public override void ApplyEvent(DomainEvent domainEvent)
     {
         switch (domainEvent)
@@ -30,11 +39,11 @@ public class MainViewModel(
                 break;
 
             case BetLost bl:
-                outputService.WriteMessage($"Player {bl.Player} lost {bl.Bet.Amount}");
+                outputService.WriteMessage($"Player {bl.Player.Id.GetHashCode()} lost {bl.Bet.Amount}");
                 break;
 
             case BetWon bw:
-                outputService.WriteMessage($"Player {bw.Player} won {bw.Bet.Amount}");
+                outputService.WriteMessage($"Player {bw.Player.Id.GetHashCode()} won {bw.Bet.Amount}");
                 break;
         }
     }

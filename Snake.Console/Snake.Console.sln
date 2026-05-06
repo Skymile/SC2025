@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino", "Casino\Casino.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.Core", "Casino.Core\Casino.Core.csproj", "{5AB7FC9D-F736-4557-95D1-2D496ADC30E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.Wpf", "Casino.Wpf\Casino.Wpf.csproj", "{7C2B79D3-C412-4AEF-BDA9-A8054819783E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -209,6 +211,18 @@ Global
 		{5AB7FC9D-F736-4557-95D1-2D496ADC30E8}.Release|x64.Build.0 = Release|Any CPU
 		{5AB7FC9D-F736-4557-95D1-2D496ADC30E8}.Release|x86.ActiveCfg = Release|Any CPU
 		{5AB7FC9D-F736-4557-95D1-2D496ADC30E8}.Release|x86.Build.0 = Release|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Debug|x64.Build.0 = Debug|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Debug|x86.Build.0 = Debug|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|x64.ActiveCfg = Release|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|x64.Build.0 = Release|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|x86.ActiveCfg = Release|Any CPU
+		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

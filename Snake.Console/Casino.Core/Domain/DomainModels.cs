@@ -19,4 +19,7 @@ public abstract record Bet(Guid Id, Amount Amount);
 public record StraightBet(Guid Id, Amount Amount, Pocket Pocket)
     : Bet(Id, Amount);
 
-public record Player(Guid Id);
+public record Player(Guid Id)
+{
+    public required Amount Capital { get; set; }
+}

@@ -34,4 +34,7 @@ public class OutputService : IOutputService
         Console.WriteLine();
         Console.WriteLine();
     }
+
+    public void WritePlayerCapital(Player player) =>
+        Console.WriteLine($"You have {player.Capital.Value}$");
 }

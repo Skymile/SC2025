@@ -17,7 +17,7 @@ public class Pocket(int Value, Color Color)
     public const int MinPocket = 0;
 
     public static Result<Pocket> TryCreate(int value) =>
-        value < MinPocket || value >= MaxPocket
+        value < MinPocket || value > MaxPocket
             ? Result.Create<Pocket>(
                 Text.ValueMustBeBetween.Format(MinPocket, MaxPocket)
             )

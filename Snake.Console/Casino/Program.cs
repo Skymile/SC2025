@@ -8,14 +8,26 @@ var vm = new MainViewModel(
     RouletteAggregate.TryCreate().Value
 );
 
-var player = new Player(Guid.NewGuid());
+var player = new Player(Guid.NewGuid())
+{
+    Capital = Amount.TryCreate(10_000m).Value
+};
 
-//vm.WriteBoard();
-
-vm.PlaceBet(
-    player,
-    new StraightBet(
-        Guid.NewGuid(), 
-        vm.ChooseAmount(), 
-        vm.ChoosePocket())
-);
+while (player.Capital.Value > 100)
+{
+    vm.WriteBoard();
+    vm.WritePlayerCapital(player);
+    var amount = vm.ChooseAmount();
+    
+    if (player.Capital.Value < amount.Value)
+        vm.CapitalTooLow();
+    else
+        vm.PlaceBet(
+            player,
+            new StraightBet(
+                Guid.NewGuid(), 
+                amount, 
+                vm.ChoosePocket())
+        );
+}
+vm.Broke();

@@ -39,6 +39,14 @@ public sealed class RouletteAggregate : ReactiveBase
                         break;
                 }
                 break;
+
+            case BetWon bw:
+                bw.Player.Capital += bw.Bet.Amount;
+                break;
+
+            case BetLost bl:
+                bl.Player.Capital -= bl.Bet.Amount;
+                break;
         }
         events.Add(domainEvent);
     }
