@@ -33,6 +33,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.Core", "Casino.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Casino.Wpf", "Casino.Wpf\Casino.Wpf.csproj", "{7C2B79D3-C412-4AEF-BDA9-A8054819783E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Keystrokes", "Keystrokes", "{B0825808-6AB5-4C9C-9334-D39E4FD7C247}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keystrokes.Core", "Keystrokes.Core\Keystrokes.Core.csproj", "{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keystrokes.Desktop", "Keystrokes.Desktop\Keystrokes.Desktop.csproj", "{CE6F7569-4858-4D4E-8797-C4E07EA47B46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -223,9 +229,37 @@ Global
 		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|x64.Build.0 = Release|Any CPU
 		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|x86.ActiveCfg = Release|Any CPU
 		{7C2B79D3-C412-4AEF-BDA9-A8054819783E}.Release|x86.Build.0 = Release|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Debug|x64.Build.0 = Debug|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Debug|x86.Build.0 = Debug|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Release|x64.ActiveCfg = Release|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Release|x64.Build.0 = Release|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Release|x86.ActiveCfg = Release|Any CPU
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01}.Release|x86.Build.0 = Release|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Debug|x64.Build.0 = Debug|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Debug|x86.Build.0 = Debug|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|x64.ActiveCfg = Release|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|x64.Build.0 = Release|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|x86.ActiveCfg = Release|Any CPU
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5ABA15BF-965C-4CAB-9876-B74ED1B4AE01} = {B0825808-6AB5-4C9C-9334-D39E4FD7C247}
+		{CE6F7569-4858-4D4E-8797-C4E07EA47B46} = {B0825808-6AB5-4C9C-9334-D39E4FD7C247}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AE50BD6-8EAA-4A86-99E3-126B83A66272}
