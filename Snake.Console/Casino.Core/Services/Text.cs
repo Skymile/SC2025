@@ -5,6 +5,8 @@ public static class Text
     public static string Format(this string format, params object[] args) =>
         string.Format(format, args);
 
+    public const string ValueMustBeGreater = 
+        "The value must be between greater than {0} and less than {1:# ### ### ###}";
     public const string ValueMustBeBetween =
         "The value must be between {0} and {1}";
     public const string TypeAmount =

@@ -6,19 +6,20 @@ public record Keystroke(
     double FlightTime
 )
 {
-    public static Result<Keystroke> FromTokens(IEnumerable<string> tokens) =>
-        tokens.ToArray() is { Length: 3 } arr
-            ? double.TryParse(arr[1], out var dwellTime) &&
-              double.TryParse(arr[2], out var flightTime)
-                ? Result.Create(new Keystroke(arr[0], dwellTime, flightTime))
-                : Error.TimesInDifferentFormat<Keystroke>()
-            : Error.TokensNotThreeElements<Keystroke>(tokens);
+    public static Result<Keystroke> FromTokens(IEnumerable<string> tokens) => Result
+        .Create(tokens)
+        .Then(tokens => tokens.ToArray())
+        .And(tokens => tokens.Length == 3, "")
+        .And(t => double.TryParse(t[1], out _) , Error.TimesInDifferentFormat)
+        .And(t => double.TryParse(t[2], out _), Error.TimesInDifferentFormat)
+        .Then(t => new Keystroke(t[0], double.Parse(t[1]), double.Parse(t[2])));
 
-    public static Result<Keystroke> FromLine(string? line) =>
-        string.IsNullOrWhiteSpace(line)
-            ? Result.Create<Keystroke>("Line was empty or whitespace!")
-            : FromTokens(
-                from token in line.Trim().Split(',')
-                select token.Trim()
-            );
+    public static Result<Keystroke> FromLine(string? line) => Result
+        .Create(line)
+        .And(line => !string.IsNullOrWhiteSpace(line), "Line was empty or whitespace!")
+        .Then(line => FromTokens(
+            from token in line!.Trim().Split(',')
+            select token.Trim()
+        ))
+        .Collapse();
 }

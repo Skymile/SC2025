@@ -1,4 +1,6 @@
-﻿namespace Casino.Domain;
+﻿using Casino.Services;
+
+namespace Casino.Domain;
 
 public record Amount(decimal Value)
 {
@@ -8,10 +10,11 @@ public record Amount(decimal Value)
     public override string ToString() => Value.ToString();
 
     public static Result<Amount> TryCreate(decimal value) =>
-        value < MinAmount || value > MaxAmount
-            ? Result.Create<Amount>(
-                $"The value must be between greater than {MinAmount} and less than {MaxAmount:# ### ### ###}")
-            : Result.Create(new Amount(value));
+        Result.If(
+            value >= MinAmount && value <= MaxAmount,
+            new Amount(value),
+            Text.ValueMustBeGreater.Format(MinAmount, MaxAmount)
+        );
 
     public static Amount operator +(Amount left, Amount right) =>
         new(left.Value + right.Value);

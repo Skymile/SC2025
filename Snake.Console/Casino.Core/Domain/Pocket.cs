@@ -17,15 +17,15 @@ public class Pocket(int Value, Color Color)
     public const int MinPocket = 0;
 
     public static Result<Pocket> TryCreate(int value) =>
-        value < MinPocket || value > MaxPocket
-            ? Result.Create<Pocket>(
-                Text.ValueMustBeBetween.Format(MinPocket, MaxPocket)
-            )
-            : Result.Create(new Pocket(
+        Result.If(
+            value >= MinPocket && value <= MaxPocket,
+            new Pocket(
                 value,
-                value == 0             ? Color.Green : 
+                value == 0 ? Color.Green :
                 redSet.Contains(value) ? Color.Red : Color.Black
-            ));
+            ),
+            Text.ValueMustBeBetween.Format(MinPocket, MaxPocket)
+        );
 
     public static bool operator==(Pocket? left, Pocket? right) =>
         left?.Value == right?.Value;

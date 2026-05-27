@@ -1,9 +1,14 @@
-﻿namespace Casino;
+﻿using Casino.Domain;
+
+namespace Casino;
 
 public static class Result
 {
     public static Result<T> Create<T>(T value) => new(value);
     public static Result<T> Create<T>(string error) => new(error);
+
+    public static Result<T> If<T>(bool condition, T value, string error) =>
+        condition ? new(value) : new(error);
 }
 
 public class Result<T>
@@ -21,6 +26,9 @@ public class Result<T>
         this.Error = error;
         this.IsError = true;
     }
+
+    public Result<T> If(bool condition, T value, string error) =>
+        condition ? new(value) : new(error);
 
     public readonly T Value;
     public readonly string Error;

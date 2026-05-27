@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:Keystrokes.Desktop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox FontSize="32" TextWrapping="Wrap" Text="{Binding MainText}"/>
+    <Grid RowDefinitions="*,*">
+        <TextBox 
+            Grid.Row="0"
+            FontSize="32" TextWrapping="Wrap" 
+            PreviewKeyDown="TextBox_KeyDown" 
+            PreviewKeyUp="TextBox_KeyUp"
+            />
+        <TextBox 
+            Grid.Row="1"
+            FontSize="32" TextWrapping="Wrap" Text="{Binding MainText}"/>
     </Grid>
 </Window>

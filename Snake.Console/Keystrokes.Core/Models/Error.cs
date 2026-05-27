@@ -1,7 +1,11 @@
 ﻿namespace Keystrokes.Core.Models;
 
-public static class Error
+public static partial class Error
 {
+    public const string IdentifierNotFound = "Identifier not found in the filename!";
+    public const string FileDoesNotExist = "The file does not exist";
+    public const string TimesInDifferentFormat = "Times were not in a correct format!";
+
     public static Result<T> TokensNotThreeElements<T>(IEnumerable<string> tokens) => 
         Result.Create<T>(string.Format(
                 string.Join(
@@ -11,7 +15,4 @@ public static class Error
                 ),
                 tokens
             ));
-
-    public static Result<T> TimesInDifferentFormat<T>() =>
-        Result.Create<T>("Times were not in a correct format!");
 }
