@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keystrokes.Core", "Keystrok
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keystrokes.Desktop", "Keystrokes.Desktop\Keystrokes.Desktop.csproj", "{CE6F7569-4858-4D4E-8797-C4E07EA47B46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessing", "ImageProcessing\ImageProcessing.csproj", "{3A0BC06B-986A-41C1-AE6C-010EB444C629}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -253,6 +255,18 @@ Global
 		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|x64.Build.0 = Release|Any CPU
 		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|x86.ActiveCfg = Release|Any CPU
 		{CE6F7569-4858-4D4E-8797-C4E07EA47B46}.Release|x86.Build.0 = Release|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Debug|x64.Build.0 = Debug|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Debug|x86.Build.0 = Debug|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Release|x64.ActiveCfg = Release|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Release|x64.Build.0 = Release|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Release|x86.ActiveCfg = Release|Any CPU
+		{3A0BC06B-986A-41C1-AE6C-010EB444C629}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
