@@ -8,6 +8,55 @@ public class Picture(string filename)
 {
     public void Reset() => bmp = new(filename);
 
+    public Picture Apply(MultimatrixTransformer transformer, Size size)
+    {
+        using var data = LockBits(ImageLockMode.ReadWrite);
+        int stride = data.Stride;
+        byte[] input = new byte[Height * Stride];
+        byte[] output = new byte[input.Length];
+        Marshal.Copy(data.Scan0, input, 0, input.Length);
+
+        var matrix = new Pixel[size.Width * size.Height];
+
+        int[] offsets = new int[size.Width * size.Height];
+        for (int i = 0; i < offsets.Length; ++i)
+            offsets[i] =
+                ((i % size.Width) - size.Width / 2) * 3 +
+                ((i / size.Width) - size.Height / 2) * stride;
+
+        int minOffset = -offsets[0];
+
+        for (int x = size.Width / 2; x < Width - size.Width / 2; x += size.Width)
+            for (int y = size.Height / 2; y < Height - size.Height / 2; y += size.Height)
+            {
+                int o = x * 3 + y * stride;
+                for (int i = 0; i < offsets.Length; i++)
+                {
+                    int offset = o + offsets[i];
+
+                    matrix[i] = new Pixel(
+                        input[offset + 0],
+                        input[offset + 1],
+                        input[offset + 2]
+                    );
+                }
+
+                var result = transformer(matrix, size);
+
+                for (int i = 0; i < offsets.Length; i++)
+                {
+                    int offset = o + offsets[i];
+
+                    output[offset + 0] = result[i].R;
+                    output[offset + 1] = result[i].G;
+                    output[offset + 2] = result[i].B;
+                }
+            }
+
+        Marshal.Copy(output, 0, data.Scan0, input.Length);
+        return this;
+    }
+
     public Picture Apply(MatrixTransformer transformer, Size size)
     {
         using var data = LockBits(ImageLockMode.ReadWrite);

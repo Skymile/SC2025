@@ -6,9 +6,24 @@
         xmlns:local="clr-namespace:ImageProcessing"
         mc:Ignorable="d"
         Title="MainWindow" 
+        WindowState="Maximized"
         Height="450" 
         Width="800">
-    <Grid>
-        <Image Source="{Binding ImageSource}"/>
+    <Grid RowDefinitions="Auto,*">
+        <StackPanel>
+            <Slider 
+                Value="{Binding NiblackK}" Minimum="1" Maximum="30"
+                Height="40"
+                Margin="10"
+                />
+            <Slider 
+                Value="{Binding NiblackP}" Minimum="1" Maximum="30"
+                Height="40"
+                Margin="10"
+                />
+        </StackPanel>
+        <Image 
+            Grid.Row="1"
+            Source="{Binding ImageSource}"/>
     </Grid>
 </Window>

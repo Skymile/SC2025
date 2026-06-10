@@ -1,5 +1,6 @@
 ﻿namespace ImageProcessing;
 
+public delegate Pixel[] MultimatrixTransformer(Pixel[] input, Size size);
 public delegate Pixel MatrixTransformer(Pixel[] input, Size size);
 public delegate Pixel PixelTransformer(Pixel input);
 
@@ -40,6 +41,66 @@ public static class Algorithms
     public static readonly PixelTransformer R = i => new(i.R, 0, 0);
     public static readonly PixelTransformer G = i => new(0, i.G, 0);
     public static readonly PixelTransformer B = i => new(0, 0, i.B);
+
+    public static MultimatrixTransformer Pixelization =
+        (input, size) =>
+        {
+            double avgR = 0.0;
+            double avgG = 0.0;
+            double avgB = 0.0;
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                avgR += input[i].R;
+                avgG += input[i].G;
+                avgB += input[i].B;
+            }
+
+            avgR /= input.Length;
+            avgG /= input.Length;
+            avgB /= input.Length;
+
+            var pixel = new Pixel((byte)avgR, (byte)avgG, (byte)avgB);
+            var output = new Pixel[input.Length];
+            for (int i = 0; i < input.Length; i++)
+                output[i] = pixel;
+            return output;
+        };
+
+    public static MatrixTransformer GetNiblackAlgorithm(
+            Func<double, double, double> formula
+        ) =>
+        (input, size) =>
+        {
+            double std = 0.0;
+            double mean = 0.0;
+
+            for (int i = 0; i < input.Length; i++)
+                mean += input[i].Average;
+            mean /= input.Length;
+            for (int i = 0; i < input.Length; i++)
+                std = (input[i].Average - mean) * (input[i].Average - mean);
+            std = Math.Sqrt(std);
+
+            return new Pixel(
+                formula(mean, std) > input[input.Length / 2].Average 
+                    ? byte.MaxValue 
+                    : byte.MinValue
+            );
+        };
+
+    public static readonly MatrixTransformer Niblack = GetNiblackAlgorithm(
+        (mean, std) => mean + 0.8 * std);
+
+    public static readonly MatrixTransformer Sauvola = GetNiblackAlgorithm(
+        (mean, std) => mean * (1 - 0.8 * (1 - 1.2 / std)));
+
+    public static MatrixTransformer Phansalkar(
+            double k = 0.8,
+            double p = 1.2
+        ) => GetNiblackAlgorithm(
+            (mean, std) => mean * (1 + k * (p / std - 1))
+        );
 
     public static readonly MatrixTransformer Sharpen =
         GetConvolutionTransformer([

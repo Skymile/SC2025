@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Keystrokes\#01_1.txt" />
+    <None Include="Keystrokes\#01_2.txt" />
+    <None Include="Keystrokes\#01_3.txt" />
+    <None Include="Keystrokes\#02_1.txt" />
+    <None Include="Keystrokes\#02_2.txt" />
+    <None Include="Keystrokes\#02_3.txt" />
+    <None Include="Keystrokes\#03_1.txt" />
+    <None Include="Keystrokes\#03_2.txt" />
+    <None Include="Keystrokes\#03_3.txt" />
+    <None Include="Keystrokes\#04_1.txt" />
+    <None Include="Keystrokes\#04_2.txt" />
+    <None Include="Keystrokes\#04_3.txt" />
+    <None Include="Keystrokes\#05_1.txt" />
+    <None Include="Keystrokes\#05_2.txt" />
+    <None Include="Keystrokes\#05_3.txt" />
+    <None Include="Keystrokes\#06_0.txt" />
+    <None Include="Keystrokes\#06_1.txt" />
+    <None Include="Keystrokes\#06_2.txt" />
+    <None Include="Keystrokes\#07_0.txt" />
+    <None Include="Keystrokes\#07_1.txt" />
+    <None Include="Keystrokes\#07_2.txt" />
+    <None Include="Keystrokes\#08_1.txt" />
+    <None Include="Keystrokes\#08_2.txt" />
+    <None Include="Keystrokes\#08_3.txt" />
+    <None Include="Keystrokes\#09_0.txt" />
+    <None Include="Keystrokes\#09_1.txt" />
+    <None Include="Keystrokes\#09_2.txt" />
+    <None Include="Keystrokes\#10_0.txt" />
+    <None Include="Keystrokes\#10_1.txt" />
+    <None Include="Keystrokes\#10_2.txt" />
+    <None Include="Keystrokes\#11_0.txt" />
+    <None Include="Keystrokes\#11_1.txt" />
+    <None Include="Keystrokes\#11_2.txt" />
+    <None Include="Keystrokes\#12_0.txt" />
+    <None Include="Keystrokes\#12_1.txt" />
+    <None Include="Keystrokes\#12_2.txt" />
+    <None Include="Keystrokes\#13_0.txt" />
+    <None Include="Keystrokes\#13_1.txt" />
+    <None Include="Keystrokes\#13_2.txt" />
+    <None Include="Keystrokes\#14_0.txt" />
+    <None Include="Keystrokes\#14_1.txt" />
+    <None Include="Keystrokes\#14_2.txt" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup />
+
+  <ItemGroup>
+    <PackageReference Include="FsToolkit.ErrorHandling" Version="6.0.0-beta001" />
+  </ItemGroup>
+
+</Project>
