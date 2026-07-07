@@ -9,21 +9,31 @@
         WindowState="Maximized"
         Height="450" 
         Width="800">
-    <Grid RowDefinitions="Auto,*">
-        <StackPanel>
-            <Slider 
-                Value="{Binding NiblackK}" Minimum="1" Maximum="30"
-                Height="40"
-                Margin="10"
-                />
-            <Slider 
-                Value="{Binding NiblackP}" Minimum="1" Maximum="30"
-                Height="40"
-                Margin="10"
-                />
-        </StackPanel>
-        <Image 
-            Grid.Row="1"
-            Source="{Binding ImageSource}"/>
-    </Grid>
+    <TabControl>
+        <TabItem Header="Image">
+            <Grid RowDefinitions="Auto,*">
+                <StackPanel>
+                    <Slider 
+                        Value="{Binding NiblackK}" Minimum="1" Maximum="30"
+                        Height="40"
+                        Margin="10"
+                        />
+                    <Slider 
+                        Value="{Binding NiblackP}" Minimum="1" Maximum="30"
+                        Height="40"
+                        Margin="10"
+                        />
+                </StackPanel>
+                <Image 
+                    Grid.Row="1"
+                    Source="{Binding ImageSource}"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Identification" IsSelected="True">
+            <TextBox 
+                FontSize="32"
+                Margin="16"
+                Text="{Binding Output}"/>
+        </TabItem>
+    </TabControl>
 </Window>
